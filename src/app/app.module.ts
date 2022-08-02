@@ -29,6 +29,7 @@ const appRoutes: Routes = [
     redirectTo: '/home',
     pathMatch: 'full'
   },
+  { path: 'movie', loadChildren: () => import('./main/movie/movie.module').then(m => m.MovieModule) },
   {
     path: '**',
     redirectTo: '/pages/miscellaneous/error' //Error 404 - Page not found
