@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { AllmoviesComponent } from './allmovies.component';
+import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
+import { CardSnippetModule } from '@core/components/card-snippet/card-snippet.module';
 
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    CardSnippetModule,
+    ContentHeaderModule
   ]
 })
 export class AllmoviesModule { }

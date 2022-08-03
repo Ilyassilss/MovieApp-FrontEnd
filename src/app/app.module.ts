@@ -26,7 +26,7 @@ const appRoutes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/movie/allmovies',
     pathMatch: 'full'
   },
   { path: 'movie', loadChildren: () => import('./main/movie/movie.module').then(m => m.MovieModule) },

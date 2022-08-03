@@ -7,14 +7,22 @@ export const menu: CoreMenu[] = [
     translate: 'MENU.HOME',
     type: 'item',
     icon: 'home',
-    url: 'home'
+    url: 'movie/allmovies'
   },
   {
-    id: 'sample',
-    title: 'Sample',
-    translate: 'MENU.SAMPLE',
+    id: 'Actors',
+    title: 'Actors',
+    translate: 'MENU.ACTORS',
     type: 'item',
-    icon: 'file',
-    url: 'sample'
+    icon: 'users',
+    url: 'movie/allactors'
+  },
+  {
+    id: 'Directors',
+    title: 'Directors',
+    translate: 'MENU.DIRECTORS',
+    type: 'item',
+    icon: 'users',
+    url: 'movie/alldirectors'
   }
 ]
