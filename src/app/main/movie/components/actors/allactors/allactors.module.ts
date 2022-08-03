@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { AllactorsComponent } from './allactors.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
 
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ContentHeaderModule,
+    TranslateModule
   ]
 })
 export class AllactorsModule { }

@@ -1,1 +1,111 @@
-<p>allmovies works!</p>
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <!-- content-header component -->
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
+  
+      <!-- Basic Alerts start -->
+      <section id="home-page">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">This is that movie app i told u about 🚀</h4>
+              </div>
+              <div class="card-body pb-1">
+                <p class="card-text">All the best for your new project.</p>
+                <p class="card-text">
+                  Please make sure to read our
+                  <a
+                    href="https://pixinvent.com/demo/vuexy-angular-admin-dashboard-template/documentation/"
+                    target="_blank"
+                    >Template Documentation</a
+                  >
+                  to understand where to go from here and how to use our template.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Basic Alerts end -->
+
+      <div class="content-detached content-left">
+        <div class="content-body">
+          <!-- Blog List -->
+          <div class="blog-list-wrapper">
+            <!-- Blog List Items -->
+            <div class="row">
+              <div class="col-md-6 col-12" *ngFor="let movie of movies">
+                <div class="card">
+                  <a routerLink="/pages/blog-details/{{ movie.id }}">
+                    <img class="card-img-top img-fluid" src="{{movie?.cover?.imageLink}}{{movie?.cover?.id}}" alt="Blog Post pic" />
+                  </a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a
+                        routerLink="/pages/blog-details/{{ movie.id }}"
+                        class="blog-title-truncate text-body-heading"
+                        >{{ movie.title }}</a
+                      >
+                    </h4>
+                    <div class="media">
+                      <div class="avatar mr-50">
+                        <!-- <img [src]="movie.avatar" alt="Avatar" width="24" height="24" /> -->
+                      </div>
+                      <div class="media-body">
+                        <small class="text-muted mr-25">by</small>
+                        <small
+                          ><a href="javascript:void(0);" class="text-body">{{ movie.director.name }}</a></small
+                        >
+                        <span class="text-muted ml-50 mr-25">|</span>
+                        <small class="text-muted">{{ movie.phone }}</small>
+                      </div>
+                    </div>
+
+                    <p class="card-text blog-content-truncate">{{ movie.timestamp }}</p>
+                    <hr />
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a routerLink="/pages/blog-details/{{ movie.id }}">
+                        <div class="d-flex align-items-center">
+                          <i data-feather="message-square" class="font-medium-1 text-body mr-50"></i>
+                          <span class="text-body font-weight-bold"> movie?.categories[0].name  Comments</span>
+                        </div>
+                      </a>
+                      <a routerLink="/pages/blog-details/{{ movie.id }}" class="font-weight-bold">Read More</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/ Blog List Items -->
+  
+            <!-- Pagination -->
+            <div class="row">
+              <div class="col-12">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination justify-content-center mt-2">
+                    <li class="page-item prev-item"><a class="page-link" href="javascript:void(0);"></a></li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                    <li class="page-item active" aria-current="page">
+                      <a class="page-link" href="javascript:void(0);">4</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0);">6</a></li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0);">7</a></li>
+                    <li class="page-item next-item"><a class="page-link" href="javascript:void(0);"></a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <!--/ Pagination -->
+          </div>
+          <!--/ Blog List -->
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  

@@ -3,7 +3,9 @@ export const locale = {
   data: {
     MENU: {
       HOME: 'Maison',
-      SAMPLE: 'Échantillon'
+      SAMPLE: 'Échantillon',
+      ACTORS: 'Acteurs',
+      DIRECTORS: 'Directeurs'
     }
   }
 }
