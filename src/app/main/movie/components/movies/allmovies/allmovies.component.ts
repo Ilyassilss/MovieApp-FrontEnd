@@ -12,9 +12,11 @@ export class AllmoviesComponent implements OnInit {
   public contentHeader: object
 
   public movies = []
+  public categories = []
 
   ngOnInit() {
     this.getAllMovies();
+    this.getAllCategories();
     
     this.contentHeader = {
       headerTitle: 'Home',
@@ -40,6 +42,18 @@ export class AllmoviesComponent implements OnInit {
     this.movieService.getAllHome().subscribe({
       next : (res) => {
         this.movies = res;
+        console.log(res);
+      },
+      error(err) {
+        console.error(err);
+      },
+    })
+  }
+
+  getAllCategories() {
+    this.movieService.getAllCategories().subscribe({
+      next : (res) => {
+        this.categories = res;
         console.log(res);
       },
       error(err) {

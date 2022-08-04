@@ -16,6 +16,10 @@ export class MovieService {
     return this.http.get<any[]>(`${baseUrl}/movie`);
   }
 
+  getAllCategories(): Observable<any[]> {
+    return this.http.get<any[]>(`${baseUrl}/category`);
+  }
+
   getAllHome(): Observable<any[]> {
     return this.http.get<any[]>(`${baseUrl}/movie/home`);
   }
