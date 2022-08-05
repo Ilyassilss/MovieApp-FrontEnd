@@ -26,7 +26,7 @@ const routes: Routes = [
     CoreCommonModule,
     QuillModule.forRoot(),
     NgSelectModule,
-    NgbModule
+    NgbModule,
   ]
 })
 export class AddmovieModule { }

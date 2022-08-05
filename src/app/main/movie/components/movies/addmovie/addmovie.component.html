@@ -1,157 +1,3 @@
-<form class="mx-5 my-5">
-  <div class="form-group mb-2">
-    <label class="mb-2 fs-3" for="title">Title</label>
-    <input
-      type="text"
-      class="form-control"
-      name="title"
-      id="title"
-      [(ngModel)]="movie.title"
-      placeholder="the movie Title"
-    />
-  </div>
-  <div class="form-group">
-    <label class="mb-2 fs-3" for="description">Description</label>
-    <textarea
-      class="form-control"
-      name="description"
-      [(ngModel)]="movie.description"
-      id="description"
-      rows="3"
-    ></textarea>
-  </div>
-  <div class="form-group">
-    <label class="mb-2 fs-3" for="formFile">Cover</label>
-    <input
-      type="file"
-      accept="images/*"
-      (change)="selectImage($event)"
-      class="mb-2 form-control"
-      id="cover"
-      name="movieCover"
-    />
-    <img
-      [src]="coverPreview"
-      class="rounded mx-auto d-block"
-      width="200"
-      height="200"
-      alt="..."
-    />
-  </div>
-
-  <div class="form-group">
-    <label class="mb-2 fs-3" for="name">Director Name</label>
-    <input
-      type="text"
-      class="form-control"
-      name="name"
-      [(ngModel)]="movie.director.name"
-      id="name"
-      placeholder="the director name"
-    />
-  </div>
-
-  <div class="form-group mb-2">
-    <label class="mb-2 fs-3" for="phone">Director photo Link</label>
-    <input
-      type="tel"
-      class="form-control"
-      name="link"
-      [(ngModel)]="movie.director.link"
-      id="link"
-      placeholder="the director photo Link"
-    />
-  </div>
-
-  <div class="form-group m-3 container">
-    <label class="pb-2 fs-3">Categories</label>
-    <div class="row" id="checkRow">
-      <div class="col-sm-4 form-check" *ngFor="let cat of categories">
-        <input
-          class="form-check-input"
-          name="{{ cat.name }}"
-          (change)="setCat($event)"
-          type="checkbox"
-          id="{{ cat.cat_id }}"
-        />
-        <label class="form-check-label" for="flexCheckDefault">
-          {{ cat.name }}
-        </label>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group m-3 row">
-    <div class="form-group mt-3">
-      <label class="mb-2 fs-3" for="name">Actors</label>
-      <table class="table table-dark table-striped table-sm">
-        <thead class="bg-light">
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Age</th>
-            <th>Photo Link</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let row of dynamicRows; let i = index">
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                name="firstName{{ i }}"
-                [(ngModel)]="movie.actors[i].firstName"
-                id="firstName"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                name="lastName{{ i }}"
-                [(ngModel)]="movie.actors[i].lastName"
-                id="lastName"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                name="age{{ i }}"
-                [(ngModel)]="movie.actors[i].age"
-                id="age"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                id="photoLink"
-                [(ngModel)]="movie.actors[i].photoLink"
-                name="photoLink{{ i }}"
-              />
-            </td>
-            <td>
-              <button
-                *ngIf="i === dynamicRows.length - 1"
-                (click)="addNew()"
-                class="btn btn-light"
-              >
-                <i class="bi bi-plus-square-fill"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <button (click)="saveMovie()" class="btn-lg btn btn-success float-end mb-4">
-    save
-  </button>
-</form>
-
 <div class="content-wrapper container-xxl p-0">
   <div class="content-body">
     <!-- content-header component -->
@@ -164,7 +10,7 @@
           <div class="card">
             <div class="card-body">
               <!-- Form -->
-              <form action="javascript:;" class="mt-2">
+              <form class="mt-2">
                 <div class="row">
                   <div class="col-md-6 col-12">
                     <div class="form-group mb-2">
@@ -189,7 +35,7 @@
                         [searchable]="false"
                         bindLabel="name"
                         placeholder="Select people"
-                        [(ngModel)]="selectCategoriesSelected"
+                        [(ngModel)]="movie.categories"
                         name="selectTitle"
                       >
                       </ng-select>
@@ -215,7 +61,7 @@
                         id="blog-edit-slug"
                         class="form-control"
                         name="movie.director.link"
-                        [(ngModel)]="movie.director.link"
+                        [(ngModel)]="movie.director.photoLink"
                       />
                     </div>
                   </div>
@@ -223,10 +69,8 @@
                     <div class="form-group mb-2">
                       <label>Content</label>
                       <quill-editor
-                        style="height: 300px"
-                        [(ngModel)]="movie.description"
-                        name="quill-content"
-                        [modules]="{ syntax: true, toolbar: [['code-block']] }"
+                      [(ngModel)]="movie.description"
+                      name="movie.description"
                       >
                         <div quill-editor-toolbar>
                           <span class="ql-formats">
@@ -291,101 +135,88 @@
                   <!-- Add actors -->
                   <div class="col-12 mb-2">
                     <div class="border rounded p-2">
-                      <h4 class="mb-1">Movie Poster</h4>
+                      <h4 class="mb-1">Add actors</h4>
                       <form action="#" class="invoice-repeater">
                         <div
-                          *ngFor="let item of items; let i = index"
-                          @heightIn
-                        >
+                          *ngFor="let actor of movie.actors; let i = index">
                           <div class="row d-flex align-items-end">
-                            <div class="col-md-4 col-12">
+                            <div class="col-md-3 col-12">
                               <div class="form-group">
-                                <label for="itemName{{ i }}">Item Name</label>
+                                <label for="itemName{{ i }}">First name</label>
                                 <input
                                   type="text"
                                   class="form-control"
-                                  [(ngModel)]="item.itemName"
-                                  name="itemName{{ i }}"
-                                  id="itemName{{ i }}"
-                                  placeholder="Vuexy Admin Template"
+                                  [(ngModel)]="movie.actors[i].firstName"
+                                  name="firstName{{ i }}"
+                                  id="firstName{{ i }}"
+                                  placeholder="actor first name"
                                 />
                               </div>
                             </div>
 
-                            <div class="col-md-2 col-12">
+                            <div class="col-md-3 col-12">
                               <div class="form-group">
-                                <label for="itemCost">Cost</label>
-                                <input
-                                  type="number"
-                                  class="form-control"
-                                  id="itemcost"
-                                  [(ngModel)]="item.itemCost"
-                                  name="itemCost{{ i }}"
-                                  id="itemCost{{ i }}"
-                                  placeholder="32"
-                                />
-                              </div>
-                            </div>
-
-                            <div class="col-md-2 col-12">
-                              <div class="form-group">
-                                <label for="itemQuantity{{ i }}"
-                                  >Quantity</label
-                                >
-                                <input
-                                  type="number"
-                                  class="form-control"
-                                  id="itemQuantity{{ i }}"
-                                  name="itemQuantity{{ i }}"
-                                  [(ngModel)]="item.itemQuantity"
-                                  placeholder="1"
-                                />
-                              </div>
-                            </div>
-
-                            <div class="col-md-2 col-12">
-                              <div class="form-group">
-                                <label for="staticPrice">Price</label>
+                                <label for="itemCost">Last name</label>
                                 <input
                                   type="text"
-                                  readonly
-                                  class="form-control-plaintext"
-                                  id="staticPrice"
-                                  value="$32"
+                                  class="form-control"
+                                  id="lastName"
+                                  [(ngModel)]="movie.actors[i].lastName"
+                                  name="lastName{{ i }}"
+                                  id="lastName{{ i }}"
+                                  placeholder="actor last name"
+                                />
+                              </div>
+                            </div>
+                            
+                            <div class="col-md-2 col-12">
+                                <div class="form-group">
+                                  <label for="itemCost">Age</label>
+                                  <input
+                                    type="number"
+                                    class="form-control"
+                                    id="age"
+                                    [(ngModel)]="movie.actors[i].age"
+                                    name="age{{ i }}"
+                                    id="age{{ i }}"
+                                    placeholder="0"
+                                  />
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-12">
+                              <div class="form-group">
+                                <label for="itemCost">Photo link</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="photoLink"
+                                  [(ngModel)]="movie.actors[i].photoLink"
+                                  name="photoLink{{ i }}"
+                                  id="photoLink{{ i }}"
+                                  placeholder="actor photo link"
                                 />
                               </div>
                             </div>
 
-                            <div class="col-md-2 col-12 mb-50">
-                              <div class="form-group">
-                                <button
-                                  class="btn btn-outline-danger text-nowrap px-1"
-                                  (click)="deleteItem(i)"
-                                  rippleEffect
-                                >
-                                  <i data-feather="x" class="mr-25"></i>
-                                  <span>Delete</span>
-                                </button>
-                              </div>
-                            </div>
                           </div>
                           <hr />
                         </div>
+                        
+                        <div class="col-md-2 col-12 mb-50">
+                            <div class="form-group">
+                              <button
+                                  class="btn btn-icon btn-primary"
+                                  type="button"
+                                  (click)="addItem()"
+                                  rippleEffect
+                                >
+                                  <i data-feather="plus" class="mr-25"></i>
+                                  <span>Add New</span>
+                                </button>
+                            </div>
+                          </div>
                       </form>
-                      <div class="row">
-                        <div class="col-12">
-                          <button
-                            class="btn btn-icon btn-primary"
-                            type="button"
-                            (click)="addItem()"
-                            rippleEffect
-                          >
-                            <i data-feather="plus" class="mr-25"></i>
-                            <span>Add New</span>
-                          </button>
-                        </div>
-                      </div>
-                      <div class="media-body"></div>
                     </div>
                   </div>
                   <!--/ Add actors -->
@@ -393,6 +224,7 @@
                     <button
                       type="submit"
                       class="btn btn-primary mr-1"
+                      (click)="saveMovie()"
                       rippleEffect
                     >
                       Save movie

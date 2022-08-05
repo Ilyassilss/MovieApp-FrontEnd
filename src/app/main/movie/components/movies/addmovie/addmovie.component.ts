@@ -15,26 +15,23 @@ export class AddmovieComponent implements OnInit {
   movieCover: File | null = null;
   coverPreview: string = 'https://placeholder.pics/svg/110x170';
   public selectCategories: Observable<any[]>;
-  public selectCategoriesSelected = ['Fashion'];
+  public categories = [];
+  public selectCategoriesSelected = this.categories[0];
   
-  categories = [];
-  
-  cat = [];
   movie = {
     id: 0,
     title: '',
     description: '',
     director: {
       name: '',
-      link: '',
+      phone: '12458745',
+      photoLink: '',
     },
     actors: [{
-      actor_id: 0,
       age: 0,
       firstName: "",
       lastName: "",
-      photoLink: "",
-      movies: []
+      photoLink: ""
     }],
     categories: [],
     images: [],
@@ -75,82 +72,22 @@ export class AddmovieComponent implements OnInit {
     });
   }
 
-   // public
-   public items = [{ itemId: '', itemName: '', itemQuantity: '', itemCost: '' }];
-
-   public item = {
-     itemName: '',
-     itemQuantity: '',
-     itemCost: ''
-   };
- 
-   // Public Methods
-   // -----------------------------------------------------------------------------------------------------
- 
    /**
-    * Add Item
+    * Add actor
     */
    addItem() {
-     this.items.push({
-       itemId: '',
-       itemName: '',
-       itemQuantity: '',
-       itemCost: ''
+     this.movie.actors.push({
+      age: 0,
+      firstName: "",
+      lastName: "",
+      photoLink: ""
      });
    }
- 
-   /**
-    * DeleteItem
-    *
-    * @param id
-    */
-   deleteItem(id) {
-     for (let i = 0; i < this.items.length; i++) {
-       if (this.items.indexOf(this.items[i]) === id) {
-         this.items.splice(i, 1);
-         break;
-       }
-     }
-   }
-
-  dynamicRows = [0];
-
-  addNew() {
-    const act = {
-      actor_id: 0,
-      age: 0,
-      firstName: '',
-      lastName: '',
-      photoLink: '',
-      movies: []
-    }
-    this.movie.actors.push(act);
-    this.dynamicRows.push(this.dynamicRows.length);
-
-  }
-
-  setCat(e: Event): void {
-    e.stopPropagation();
-    if (e.target["checked"]) {
-      var newCategorie = {
-        cat_id: 0,
-        description: "",
-        name: e.target["name"]
-      };
-      this.cat.push(newCategorie);
-    }
-  }
 
   saveMovie(): void {
-    this.movie.actors.pop();
-    const data = {
-      title: this.movie.title,
-      description: this.movie.description,
-      director: this.movie.director,
-      actors: this.movie.actors,
-      categories: this.cat
-    };
-    this.movieService.addMovie(data).subscribe({
+    this.movie.description = this.movie.description.substring(3,this.movie.description.length-4)
+    console.log(this.movie);
+    this.movieService.addMovie(this.movie).subscribe({
       next: (data) => {
         console.log(data);
         const movie_id = data.id;
@@ -176,7 +113,7 @@ export class AddmovieComponent implements OnInit {
         (event: any) => {
           if (event instanceof HttpResponse) {
             console.log(event.body);
-            this.router.navigateByUrl('/movies');
+            this.router.navigateByUrl('');
           }
         },
         (err: any) => {
