@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { AlldirectorsComponent } from './alldirectors.component';
+import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ContentHeaderModule
   ]
 })
 export class AlldirectorsModule { }

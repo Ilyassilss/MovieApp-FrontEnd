@@ -8,20 +8,24 @@ const baseUrl = environment.baseURL;
 @Injectable({
   providedIn: 'root'
 })
-export class MovieserviceService {
+export class MovieService {
 
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any[]> {
-    return this.http.get<any[]>(baseUrl);
+    return this.http.get<any[]>(`${baseUrl}/movie`);
+  }
+
+  getAllCategories(): Observable<any[]> {
+    return this.http.get<any[]>(`${baseUrl}/category`);
   }
 
   getAllHome(): Observable<any[]> {
-    return this.http.get<any[]>(`${baseUrl}/home`);
+    return this.http.get<any[]>(`${baseUrl}/movie/home`);
   }
 
   addMovie(data: any): Observable<any> {
-    return this.http.post(`${baseUrl}/add`, data);
+    return this.http.post(`${baseUrl}/movie/add`, data);
   }
 
   uploadImage(file: File, movie_id: number, is_cover: boolean): Observable<HttpEvent<any>> {
@@ -29,7 +33,7 @@ export class MovieserviceService {
     formData.append('file', file);
     formData.append('is_cover', (is_cover) ? '1' : '0');
 
-    const req = new HttpRequest('POST', `${baseUrl}/uploadFile/${movie_id}`, formData, {
+    const req = new HttpRequest('POST', `${baseUrl}/movie/uploadFile/${movie_id}`, formData, {
       responseType: 'json'
     });
     return this.http.request(req);
